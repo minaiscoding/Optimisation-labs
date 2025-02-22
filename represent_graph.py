@@ -35,9 +35,9 @@ def represent_graph(adj_matrix, colors=None):
     num_nodes = adj_matrix.shape[0]
     num_edges = np.sum(adj_matrix) // 2
 
-    print("\n📊 Statistiques du Graphe 📊")
-    print(f"🔹 Nombre de nœuds : {num_nodes}")
-    print(f"🔹 Nombre d'arêtes : {num_edges}\n")
+    print("\n Statistiques du Graphe ")
+    print(f"Nombre de nœuds : {num_nodes}")
+    print(f"Nombre d'arêtes : {num_edges}\n")
 
     # Création du graphe
     G = nx.Graph()
@@ -55,7 +55,7 @@ def represent_graph(adj_matrix, colors=None):
         color_palette = generate_distinct_colors(num_colors_needed)
         node_colors = [color_palette[c] for c in colors]
         title = "Graphe avec coloration"
-        print(f"\n🎨 Utilisation de {num_colors_needed} couleurs distinctes")
+        print(f"\n Utilisation de {num_colors_needed} couleurs distinctes")
     else:
         node_colors = ['lightblue' for _ in range(num_nodes)]
         title = "Graphe initial"
@@ -102,7 +102,7 @@ def represent_graph(adj_matrix, colors=None):
     
     # Afficher les statistiques de coloration
     if colors is not None:
-        print("\n🎨 Statistiques de coloration:")
+        print("\n Statistiques de coloration:")
         print(f"Nombre total de couleurs utilisées: {len(set(colors))}")
         if num_nodes <= 50:  # Limiter l'affichage détaillé pour les grands graphes
             print("\nDétails de la coloration:")
