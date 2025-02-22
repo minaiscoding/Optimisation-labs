@@ -76,7 +76,14 @@ def branch_and_bound_coloration(matrice_adj):
     # Pile pour le parcours avec contexte enrichi
     pile = [(0, [-1] * n, 0)]  # (niveau, coloration, nb_couleurs_utilisées)
     
+    MAX_ITERATIONS = 450*borne_sup  # Adjust based on expected complexity
+    iteration = 0
+
     while pile:
+        iteration += 1
+        if iteration > MAX_ITERATIONS:
+            print("Possible infinite loop detected, stopping execution.")
+            break
         niveau, coloration, nb_couleurs = pile.pop()
         
         # Solution complète trouvée
