@@ -63,7 +63,7 @@ def evaluer_coloration(matrice_adj, coloration, niveau, nb_couleurs_actuelles):
 
 def branch_and_bound_coloration(matrice_adj):
     """
-    Algorithme Branch and Bound 
+    Algorithme Branch and Bound amélioré avec une meilleure stratégie d'élagage.
     """
     temps_debut = time.time()
     n = len(matrice_adj)
@@ -76,11 +76,7 @@ def branch_and_bound_coloration(matrice_adj):
     # Pile pour le parcours avec contexte enrichi
     pile = [(0, [-1] * n, 0)]  # (niveau, coloration, nb_couleurs_utilisées)
     
-  
-
     while pile:
-        iteration += 1
-  
         niveau, coloration, nb_couleurs = pile.pop()
         
         # Solution complète trouvée
