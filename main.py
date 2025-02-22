@@ -1,4 +1,6 @@
 # main.py
+import numpy as np
+
 
 from get_graph_from_file import get_graph_from_file
 from represent_graph import represent_graph
