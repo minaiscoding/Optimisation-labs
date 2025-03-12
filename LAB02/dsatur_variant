@@ -1,0 +1,37 @@
+import numpy as np
+def dsatur_variant(adj_matrix):
+    """
+    DSATUR variant: Selects the next node from the neighbors of the last colored node,
+    prioritizing the one with the highest saturation degree.
+    """
+    num_vertices = len(adj_matrix)
+    colors = -1 * np.ones(num_vertices, dtype=int)
+    degrees = np.sum(adj_matrix, axis=1)
+    uncolored = set(range(num_vertices))
+
+    current_node = np.argmax(degrees)  # Start with highest degree node
+    colors[current_node] = 0
+    uncolored.remove(current_node)
+
+    while uncolored:
+        neighbors = np.where(adj_matrix[current_node] == 1)[0]
+        uncolored_neighbors = [n for n in neighbors if n in uncolored]
+
+        if uncolored_neighbors:
+            dsat_values = {node: sat_degree(adj_matrix, colors, node) for node in uncolored_neighbors}
+            current_node = max(dsat_values, key=dsat_values.get)
+        else:
+            dsat_values = {node: sat_degree(adj_matrix, colors, node) for node in uncolored}
+            current_node = max(dsat_values, key=lambda x: (dsat_values[x], degrees[x]))
+
+        neighbor_colors = colors[np.where(adj_matrix[current_node] == 1)[0]]
+        used_colors = set(neighbor_colors[neighbor_colors != -1])
+
+        for color in range(num_vertices):
+            if color not in used_colors:
+                colors[current_node] = color
+                break
+
+        uncolored.remove(current_node)
+
+    return colors
